@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noa Ramia — Portfolio BTS SIO</title>
+    <link href="style/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+    /* ══════════════════════════════════════
+       TABLEAU DE SYNTHÈSE — styles inline
+       ══════════════════════════════════════ */
+
+    #synthese {
+        padding: 120px 6vw 100px;
+        background: #0a0a0a;
+        position: relative;
+        overflow: hidden;
+    }
+    #synthese::before {
+        content: '';
+        position: absolute;
+        top: -200px; right: -200px;
+        width: 600px; height: 600px;
+        background: radial-gradient(circle, rgba(180,150,100,0.04) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .synthese-inner { max-width: 1400px; margin: 0 auto; }
+
+    /* Header */
+    .synthese-header { margin-bottom: 60px; }
+    .synthese-header .section-label {
+        font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+        color: rgba(180,150,100,.4); font-family: 'DM Sans', sans-serif;
+        font-weight: 500; margin-bottom: 18px; display: block;
+    }
+    .synthese-header h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.2rem, 4vw, 3.4rem);
+        font-weight: 600; color: #f0ebe2; line-height: 1.15; margin: 0 0 18px;
+    }
+    .synthese-header p {
+        font-family: 'DM Sans', sans-serif; font-size: .95rem;
+        color: rgba(240,235,226,.45); max-width: 560px; line-height: 1.75;
+    }
+
+    /* Table scroll wrapper */
+    .table-scroll {
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid rgba(180,150,100,.15);
+        box-shadow: 0 4px 60px rgba(0,0,0,.5);
+    }
+
+    /* Table base */
+    .synthese-table {
+        width: 100%; min-width: 1100px;
+        border-collapse: collapse;
+        font-family: 'DM Sans', sans-serif;
+        background: #111;
+    }
+
+    /* TH — realisation */
+    .th-realisation {
+        width: 240px; min-width: 220px;
+        background: #0d0d0d;
+        padding: 22px 20px;
+        text-align: left;
+        font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+        color: rgba(180,150,100,.6); font-weight: 500;
+        border: 1px solid rgba(180,150,100,.12);
+        vertical-align: bottom;
+    }
+
+    /* TH — periode */
+    .th-periode { width: 110px; min-width: 100px; }
+
+    /* All TH cells */
+    .synthese-table thead tr th {
+        background: #0d0d0d; padding: 0;
+        vertical-align: bottom;
+        border: 1px solid rgba(180,150,100,.12);
+    }
+
+    /* Vertical text label inside TH */
+    .th-label {
+        display: block;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        padding: 22px 14px 14px;
+        font-size: .72rem; font-weight: 500; letter-spacing: .04em;
+        color: rgba(240,235,226,.55); line-height: 1.4;
+        min-height: 160px;
+    }
+
+    /* Colored top border per block */
+    .col-infra .th-label  { border-top: 2px solid #6a8fa0; }
+    .col-dev   .th-label  { border-top: 2px solid #b49664; }
+    .col-cyber .th-label  { border-top: 2px solid #c07860; }
+    .col-proj  .th-label  { border-top: 2px solid #7a9070; }
+    .col-tests .th-label  { border-top: 2px solid #9080b0; }
+    .col-perso .th-label  { border-top: 2px solid #80a0a0; }
+
+    /* Section separator row */
+    .section-row td {
+        background: rgba(180,150,100,.06);
+        color: rgba(180,150,100,.8);
+        font-size: .72rem; font-weight: 500;
+        letter-spacing: .14em; text-transform: uppercase;
+        padding: 10px 20px;
+        border: 1px solid rgba(180,150,100,.12);
+        text-align: center;
+    }
+
+    /* Data rows */
+    .synthese-table tbody tr.data-row { transition: background .2s; }
+    .synthese-table tbody tr.data-row:hover { background: rgba(180,150,100,.04); }
+    .synthese-table tbody tr.data-row td {
+        border: 1px solid rgba(240,235,226,.06);
+        padding: 0; vertical-align: middle;
+    }
+
+    /* Realisation cell */
+    .td-realisation { padding: 20px !important; background: #0f0f0f; }
+    .td-realisation .proj-title {
+        font-size: .88rem; font-weight: 500; color: #f0ebe2;
+        margin-bottom: 5px; display: block;
+    }
+    .td-realisation .proj-docs {
+        font-size: .72rem; color: rgba(240,235,226,.35); line-height: 1.5;
+    }
+
+    /* Periode cell */
+    .td-periode { padding: 14px 12px !important; background: #0f0f0f; }
+    .periode-badge {
+        font-size: .68rem; color: rgba(240,235,226,.4);
+        text-align: center; display: block; line-height: 1.5;
+    }
+
+    /* Competence cell */
+    .td-comp { text-align: center; padding: 0 !important; min-width: 120px; }
+    .comp-check {
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 5px; padding: 14px 10px; height: 100%;
+    }
+
+    /* Dot indicators */
+    .dot {
+        width: 10px; height: 10px;
+        border-radius: 50%; display: inline-block;
+    }
+    .dot-full    { background: #b49664; box-shadow: 0 0 8px rgba(180,150,100,.45); }
+    .dot-partial { background: rgba(180,150,100,.25); border: 1px solid rgba(180,150,100,.5); }
+    .dot-none    { background: transparent; border: 1px solid rgba(240,235,226,.1); }
+
+    /* Sub-label inside comp cell */
+    .comp-sublabel {
+        font-size: .6rem; color: rgba(240,235,226,.3);
+        text-align: center; line-height: 1.3; max-width: 90px;
+    }
+
+    /* Legend */
+    .legend {
+        display: flex; gap: 28px; margin-top: 28px; flex-wrap: wrap;
+    }
+    .legend-item {
+        display: flex; align-items: center; gap: 8px;
+        font-size: .72rem; font-family: 'DM Sans', sans-serif;
+        color: rgba(240,235,226,.4); font-weight: 400;
+    }
+
+    /* Reveal (shared with rest of page) */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+    <a href="#accueil" class="nav-logo">Noa Ramia</a>
+    <ul>
+        <li><a href="#apropos">Présentation</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#synthese">Tableau de synthèse</a></li>
+        <li><a href="#veille">Veille</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="accueil" class="hero">
+    <div class="hero-left">
+        <p class="hero-eyebrow">Portfolio · BTS SIO 2025</p>
+        <h1>Développeur<br><em>&amp; créateur</em><br>web</h1>
+        <p>Étudiant passionné en deuxième année de BTS SIO, actuellement stagiaire chez Deshagan Network. Je conçois des expériences numériques soignées et performantes.</p>
+        <a href="#projets" class="hero-cta">Voir mes réalisations</a>
+    </div>
+    <div class="hero-right">
+        <div class="hero-stat">
+            <div class="number">2</div>
+            <div class="label">Années de formation</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+            <div class="number">3+</div>
+            <div class="label">Projets réalisés</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+            <div class="number">BTS</div>
+            <div class="label">SIO · SLAM</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="apropos">
+    <div class="about-inner">
+        <div class="about-image-block reveal">
+            <div class="about-frame">
+                <div class="about-frame-placeholder">NR</div>
+            </div>
+            <div class="about-accent-box">
+                <span class="num">20</span>
+                <span class="txt">ans</span>
+            </div>
+        </div>
+        <div class="about-text">
+            <div class="section-label reveal">Présentation</div>
+            <h3 class="reveal reveal-delay-1">Noa Ramia</h3>
+            <p class="role reveal reveal-delay-1">Stagiaire · Deshagan Network</p>
+            <p class="reveal reveal-delay-2">Bonjour, je suis Noa Ramia, 20 ans, étudiant en deuxième année de BTS SIO à l'Institut Limayrac de Toulouse. Titulaire d'un bac STL, c'est pendant ce BTS que j'ai clairement identifié ma voie dans le développement web et la création numérique.</p>
+            <p class="reveal reveal-delay-2">Ce portfolio rassemble les réalisations et compétences acquises au cours de ces deux années de formation, entre projets académiques et expériences de stage.</p>
+            <p class="reveal reveal-delay-3">Curieux, rigoureux et passionné par les interfaces qui fonctionnent bien autant qu'elles sont belles.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section id="competences">
+    <div class="skills-inner">
+        <div class="section-label reveal">Compétences</div>
+        <h2 class="section-title reveal reveal-delay-1">Ce que j'ai<br><em style="font-style:italic;font-family:'Playfair Display',serif;">appris et pratiqué</em></h2>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <div class="skill-num">01</div>
+                <h3>Développement web</h3>
+                <p>Conception et amélioration de sites web modernes, intégration front-end et back-end, optimisation de l'expérience utilisateur.</p>
+            </div>
+            <div class="skill-card reveal reveal-delay-1">
+                <div class="skill-num">02</div>
+                <h3>SEO &amp; Référencement</h3>
+                <p>Mise en place de stratégies de référencement naturel, audit SEO, optimisation des performances et du trafic organique.</p>
+            </div>
+            <div class="skill-card reveal reveal-delay-2">
+                <div class="skill-num">03</div>
+                <h3>Bases de données</h3>
+                <p>Conception et gestion de bases de données relationnelles, requêtes SQL, intégration avec PHP et applications web.</p>
+            </div>
+            <div class="skill-card reveal reveal-delay-3">
+                <div class="skill-num">04</div>
+                <h3>Debug &amp; Recette</h3>
+                <p>Identification et résolution de bugs, tests fonctionnels, rédaction de documentation technique et recette applicative.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projets">
+    <div class="projects-inner">
+        <div class="section-label reveal">Réalisations</div>
+        <h2 class="section-title reveal reveal-delay-1">Preuves de<br><em>compétences</em></h2>
+        <div class="projects-list">
+            <a href="http://localhost/" class="project-item reveal">
+                <div class="project-num">01</div>
+                <div class="project-info">
+                    <h3>Site Transactimo</h3>
+                    <p>Participation au développement et à l'amélioration du site de Transactimo lors de mon stage — refonte de l'interface, optimisation des performances et du référencement.</p>
+                    <div class="project-tags-row">
+                        <span class="project-tag">HTML5</span>
+                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">SEO</span>
+                    </div>
+                </div>
+                <div class="project-arrow">↗</div>
+            </a>
+            <a href="http://localhost/projets/ExerciceCodage/M2L/Code/" class="project-item reveal">
+                <div class="project-num">02</div>
+                <div class="project-info">
+                    <h3>M2L — Maison des Ligues</h3>
+                    <p>Conception d'une FAQ interactive (AppFaq) pour les ligues sportives de la Maison des Ligues de Lorraine, améliorant l'interaction avec les visiteurs.</p>
+                    <div class="project-tags-row">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">UX Design</span>
+                    </div>
+                </div>
+                <div class="project-arrow">↗</div>
+            </a>
+            <a href="http://localhost/projets/ExerciceCodage/RestoWeb/Site/" class="project-item reveal">
+                <div class="project-num">03</div>
+                <div class="project-info">
+                    <h3>RestoApp — Application de commande</h3>
+                    <p>Application web responsive permettant aux clients d'un restaurant de consulter le menu, passer commande et être notifiés à récupérer leur commande au comptoir.</p>
+                    <div class="project-tags-row">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">MySQL</span>
+                        <span class="project-tag">HTML/CSS</span>
+                        <span class="project-tag">Responsive</span>
+                    </div>
+                </div>
+                <div class="project-arrow">↗</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ TABLEAU DE SYNTHÈSE ══ -->
+<section id="synthese">
+    <div class="synthese-inner">
+
+        <div class="synthese-header">
+            <span class="section-label reveal">Tableau de synthèse</span>
+            <h2 class="reveal reveal-delay-1">Compétences<br><em style="font-style:italic;font-family:'Playfair Display',serif;">mises en œuvre</em></h2>
+            <p class="reveal reveal-delay-2">Cartographie des compétences BTS SIO — SLAM mobilisées à travers mes réalisations professionnelles et académiques.</p>
+        </div>
+
+        <div class="table-scroll reveal reveal-delay-2">
+            <table class="synthese-table">
+                <thead>
+                    <tr>
+                        <th class="th-realisation">
+                            Réalisations professionnelles<br>
+                            <small style="opacity:.5;font-weight:400;">(intitulé &amp; documents associés)</small>
+                        </th>
+                        <th class="th-periode">
+                            <span class="th-label">Période (JJ/MM/AA)</span>
+                        </th>
+                        <th class="col-infra">
+                            <span class="th-label">Recenser &amp; identifier les ressources numériques · Exploiter les ressources · Mettre en place les niveaux d'habilitation · Vérifier la continuité d'un service · Gérer des sauvegardes · Vérifier le respect des règles d'utilisation</span>
+                        </th>
+                        <th class="col-dev">
+                            <span class="th-label">Collecter, suivre et orienter des demandes · Traiter des demandes réseau et système, applicatifs · Traiter des demandes concernant les applications</span>
+                        </th>
+                        <th class="col-cyber">
+                            <span class="th-label">Participer à la valorisation de l'image de l'organisation sur les médias numériques · Recenser les enjeux économiques · Référencer les services en ligne · Participer à l'évolution d'un site Web</span>
+                        </th>
+                        <th class="col-proj">
+                            <span class="th-label">Analyser les objectifs et les modalités d'organisation d'un projet · Planifier les activités · Évaluer les indicateurs de suivi d'un projet et analyser les écarts</span>
+                        </th>
+                        <th class="col-tests">
+                            <span class="th-label">Réaliser les tests d'intégration et d'acceptation d'un service · Déployer un service · Accompagner les utilisateurs dans la mise en place d'un service</span>
+                        </th>
+                        <th class="col-perso">
+                            <span class="th-label">Mettre en place son environnement d'apprentissage personnel · Mettre en œuvre son identité professionnelle · Gérer son identité professionnelle · Développer son projet professionnel</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!-- ─ Section formation ─ -->
+                    <tr class="section-row">
+                        <td colspan="9">Réalisation en cours de formation</td>
+                    </tr>
+
+                    <!-- Projet 1 : M2L -->
+                    <tr class="data-row">
+                        <td class="td-realisation">
+                            <span class="proj-title">M2L — Maison des Ligues (AppFaq)</span>
+                            <span class="proj-docs">Cahier des charges · Maquette · Code source PHP/JS · Documentation technique</span>
+                        </td>
+                        <td class="td-periode"><span class="periode-badge">09/2023<br>→<br>12/2023</span></td>
+                        <td class="td-comp"><div class="comp-check"><span class="dot dot-none"></span></div></td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Traitement demandes applicatives</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Évolution d'un site Web, UX</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Analyse des besoins, planification</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Tests fonctionnels, déploiement local</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Documentation &amp; portfolio</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Projet 2 : RestoApp -->
+                    <tr class="data-row">
+                        <td class="td-realisation">
+                            <span class="proj-title">RestoApp — Application de commande restaurant</span>
+                            <span class="proj-docs">MCD · Scripts SQL · Code source PHP/MySQL · Rapport de tests</span>
+                        </td>
+                        <td class="td-periode"><span class="periode-badge">01/2024<br>→<br>04/2024</span></td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Gestion base de données MySQL</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Développement applicatif complet</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Interface responsive, UX</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Analyse, conception, planification</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Tests fonctionnels, recette</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Valorisation dans le portfolio</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Projet 3 : Veille -->
+                    <tr class="data-row">
+                        <td class="td-realisation">
+                            <span class="proj-title">Veille technologique — Médecine &amp; technologie</span>
+                            <span class="proj-docs">Synthèse de veille · Sources bibliographiques · Section portfolio dédiée</span>
+                        </td>
+                        <td class="td-periode"><span class="periode-badge">09/2024<br>→<br>03/2025</span></td>
+                        <td class="td-comp"><div class="comp-check"><span class="dot dot-none"></span></div></td>
+                        <td class="td-comp"><div class="comp-check"><span class="dot dot-none"></span></div></td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Analyse d'enjeux économiques &amp; numériques</span>
+                            </div>
+                        </td>
+                        <td class="td-comp"><div class="comp-check"><span class="dot dot-none"></span></div></td>
+                        <td class="td-comp"><div class="comp-check"><span class="dot dot-none"></span></div></td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Développement du projet professionnel</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- ─ Section stage ─ -->
+                    <tr class="section-row">
+                        <td colspan="9">Réalisation en milieu professionnel — Stage Deshagan Network</td>
+                    </tr>
+
+                    <!-- Projet 4 : Transactimo -->
+                    <tr class="data-row">
+                        <td class="td-realisation">
+                            <span class="proj-title">Site Transactimo — Refonte &amp; optimisation SEO</span>
+                            <span class="proj-docs">Rapport de stage · Audit SEO · Code source HTML/CSS/JS · Captures avant/après</span>
+                        </td>
+                        <td class="td-periode"><span class="periode-badge">01/2025<br>→<br>03/2025</span></td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Ressources numériques, hébergement</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Suivi &amp; traitement des demandes client</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">SEO, image en ligne, référencement</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Planification, indicateurs de perf.</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Tests d'intégration, déploiement prod</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Environnement pro, identité numérique</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Projet 5 : Portfolio -->
+                    <tr class="data-row">
+                        <td class="td-realisation">
+                            <span class="proj-title">Portfolio BTS SIO — Conception &amp; développement</span>
+                            <span class="proj-docs">Maquette Figma · Code source HTML/CSS/JS · Hébergement localhost</span>
+                        </td>
+                        <td class="td-periode"><span class="periode-badge">02/2025<br>→<br>03/2025</span></td>
+                        <td class="td-comp"><div class="comp-check"><span class="dot dot-none"></span></div></td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Développement front-end complet</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Valorisation image &amp; identité en ligne</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Organisation du projet personnel</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-partial"></span>
+                                <span class="comp-sublabel">Tests cross-browser, déploiement</span>
+                            </div>
+                        </td>
+                        <td class="td-comp">
+                            <div class="comp-check">
+                                <span class="dot dot-full"></span>
+                                <span class="comp-sublabel">Projet professionnel &amp; identité SIO</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Légende -->
+        <div class="legend reveal">
+            <div class="legend-item"><span class="dot dot-full"></span>Compétence pleinement mobilisée</div>
+            <div class="legend-item"><span class="dot dot-partial"></span>Compétence partiellement mobilisée</div>
+            <div class="legend-item"><span class="dot dot-none"></span>Non mobilisée sur ce projet</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══ VEILLE ══ -->
+<section id="veille">
+    <div class="veille-inner">
+        <div class="section-label reveal">Projet personnel · Veille technologique</div>
+        <h2 class="section-title reveal reveal-delay-1">L'ancienne technologie<br><em>dans la médecine d'aujourd'hui</em></h2>
+        <p class="veille-intro reveal reveal-delay-2">Un projet de curiosité personnelle : comprendre comment des technologies médicales vieillissantes continuent de coexister — voire de dominer — face aux innovations numériques modernes, et ce que cela implique pour le secteur de la santé.</p>
+
+        <div class="veille-grid">
+            <div class="veille-card reveal">
+                <span class="veille-era era-old">Ancienne technologie</span>
+                <h4>Radiographie analogique &amp; films argentiques</h4>
+                <p>Pendant des décennies, les hôpitaux ont utilisé des films radiographiques physiques développés chimiquement. Lourds à stocker, fragiles, non partageables à distance — mais encore présents dans certains établissements faute de budget de modernisation.</p>
+                <div class="veille-detail">Utilisé dès les années 1890 · Encore en service dans ~30% des structures mondiales</div>
+            </div>
+            <div class="veille-card reveal reveal-delay-1">
+                <span class="veille-era era-new">Technologie moderne</span>
+                <h4>Imagerie numérique &amp; PACS (Picture Archiving)</h4>
+                <p>Les systèmes PACS permettent de stocker, transmettre et consulter les images médicales en temps réel depuis n'importe quel poste. L'IA peut analyser les clichés pour détecter des anomalies invisibles à l'œil nu, réduisant les délais de diagnostic.</p>
+                <div class="veille-detail">Déployé massivement depuis 2000 · Intégration IA croissante depuis 2018</div>
+            </div>
+            <div class="veille-connector">
+                <p>La cohabitation de ces deux systèmes crée des ruptures dans les parcours de soin : un patient transféré d'un hôpital analogique vers un centre numérique voit ses données inaccessibles ou perdues.</p>
+            </div>
+            <div class="veille-card reveal">
+                <span class="veille-era era-old">Ancienne technologie</span>
+                <h4>Dossier patient papier &amp; ordonnances manuscrites</h4>
+                <p>Le dossier médical papier reste une réalité dans de nombreuses cliniques. Les ordonnances manuscrites sont source d'erreurs d'interprétation — responsables de plusieurs milliers d'incidents médicamenteux chaque année en France.</p>
+                <div class="veille-detail">Standard universel jusqu'aux années 2000 · Toujours dominant en médecine libérale</div>
+            </div>
+            <div class="veille-card reveal reveal-delay-1">
+                <span class="veille-era era-new">Technologie moderne</span>
+                <h4>DMP &amp; e-prescription (Mon Espace Santé)</h4>
+                <p>Le Dossier Médical Partagé centralise l'historique de santé du patient, accessible par tous ses praticiens. La e-prescription élimine les erreurs de lecture et sécurise le circuit du médicament de la prescription à la délivrance en pharmacie.</p>
+                <div class="veille-detail">DMP lancé en 2004, généralisé en 2022 · e-prescription obligatoire d'ici 2026</div>
+            </div>
+        </div>
+
+        <div class="veille-conclusion reveal">
+            <div class="veille-conclusion-icon">∑</div>
+            <p><strong>Ce que ce projet m'a appris :</strong> La transition numérique en santé n'est pas qu'un enjeu technique — c'est un enjeu humain, organisationnel et financier. En tant que futur développeur, concevoir des logiciels médicaux implique de comprendre les contraintes réelles des utilisateurs : interopérabilité des systèmes, sécurité des données (RGPD/HDS), et accompagnement au changement. Une leçon directement applicable à tout projet web critique.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+    <div class="contact-inner">
+        <div class="contact-left">
+            <div class="section-label reveal">Contact</div>
+            <h2 class="reveal reveal-delay-1">Entrons<br>en contact</h2>
+        </div>
+        <div class="contact-right">
+            <a href="https://mail.google.com/mail/u/0/?compose=new" class="contact-link reveal">
+                Envoyer un e-mail <span>→</span>
+            </a>
+            <a href="https://www.linkedin.com/in/noa-ramia-bb2965331/" target="_blank" class="contact-link reveal reveal-delay-1">
+                LinkedIn <span>→</span>
+            </a>
+            <a href="https://github.com/NoaRAMIA" target="_blank" class="contact-link reveal reveal-delay-2">
+                GitHub <span>→</span>
+            </a>
+            <a href="https://trello.com/u/noaramia2/boards" target="_blank" class="contact-link reveal reveal-delay-3">
+                Trello <span>→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+    <p>© 2025 Noa Ramia — Tous droits réservés</p>
+    <span class="footer-logo">NR</span>
+</footer>
+
+<script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+</script>
+</body>
+</html>
