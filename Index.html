@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Noa RAMIA - BTS SIO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #ffffff;
+            --accent: #0066cc;
+            --accent-light: #e6f0ff;
+            --text-light: #666666;
+            --border: #e5e5e5;
+            --bg-light: #f8f8f8;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            color: var(--primary);
+            background-color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-buttons a, .cta-buttons button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .cta-primary:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 800px;
+        }
+
+        /* ===== COMPETENCES TABLE ===== */
+        .competences-section {
+            background: var(--bg-light);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        thead tr {
+            background: #666;
+            color: white;
+        }
+
+        th {
+            padding: 1.25rem 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            font-size: 0.85rem;
+        }
+
+        th:first-child {
+            text-align: left;
+            padding: 1.25rem 1rem;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        td:first-child {
+            text-align: left;
+            font-weight: 500;
+            background: #999;
+            color: white;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+
+        /* ===== PROJECTS GRID ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h4 {
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 8px;
+            max-width: 750px;
+            animation: slideDown 0.3s;
+        }
+
+        .modal-close {
+            color: var(--text-light);
+            float: right;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal h2 {
+            margin-bottom: 2rem;
+            color: var(--primary);
+            margin-top: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .modal-section h3 {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .modal-section p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .competence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .competence-item {
+            padding: 0.75rem 1rem;
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .proof-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .proof-item {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .proof-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .proof-gallery {
+            margin-top: 1.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .github-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-light);
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .github-link:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 300;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 4px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 1rem;
+            user-select: none;
+            transition: color 0.3s;
+        }
+
+        .lightbox-prev {
+            left: -50px;
+        }
+
+        .lightbox-next {
+            right: -50px;
+        }
+
+        .lightbox-nav:hover {
+            color: var(--accent);
+        }
+
+        .lightbox-counter {
+            color: white;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+        }
+
+        /* Images cliquables dans les preuves */
+        .proof-gallery img {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .proof-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ===== VEILLE TECHNO SECTION ===== */
+        .veille-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .veille-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .veille-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .theme-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: var(--primary);
+        }
+
+        .theme-card:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+        }
+
+        .theme-card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .theme-card-content {
+            padding: 1.5rem;
+        }
+
+        .theme-card-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .insights-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .insights-list li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .insights-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .insights-list li:last-child {
+            border-bottom: none;
+        }
+
+        .sources-section {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .sources-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .source-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .source-item:last-child {
+            border-bottom: none;
+        }
+
+        .source-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .source-url {
+            color: var(--accent);
+            word-break: break-all;
+            font-size: 0.85rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container">
+            <div class="logo">Noa RAMIA</div>
+            <div class="nav-links">
+                <a href="#about">À propos</a>
+                <a href="#competences">Compétences</a>
+                <a href="#projects">Projets</a>
+                <a href="#veille">Veille Technologique</a>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+        <div class="hero-content">
+            <h1>Noa RAMIA</h1>
+            <p>Étudiant BTS SIO SLAM • Institut Limayrac • 2ème année</p>
+            <p style="margin-top: 1rem; font-size: 1rem; max-width: 700px;">Je suis <strong>Noa RAMIA</strong>, un développeur web en 2ème année de BTS SIO spécialité SLAM. Durant ces 2 années j'ai aquis des compétences (HTML/CSS/JavaScript) et en optimisation SEO. Je suis motivé par la création de solutions web innovantes et je maîtrise aussi la gestion de projet et la gestion du patrimoine informatique. Passionné par les applications de la technologie dans le domaine médical, j'explore comment l'IA et le développement web peuvent transformer les soins de santé. Mon objectif est de devenir un développeur full-stack compétent et de contribuer à des projets technologiques impactants, particulièrement dans le secteur de la santé numérique.</p>
+            
+            <div class="cta-buttons">
+                <a href="#competences" class="cta-primary">Voir mes compétences</a>
+                <a href="#projects" class="cta-primary" style="background: var(--accent-light); color: var(--accent);">Voir mes projets</a>
+            </div>
+
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn">💼</a>
+                <a href="https://github.com/NoaRAMIA" target="_blank" title="GitHub">🐙</a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section class="about" id="about">
+        <h2 class="section-title">À propos de moi</h2>
+        <p class="section-subtitle">Mon parcours en informatique</p>
+        <div class="about-content">
+            <p><strong>Formation :</strong> Baccalauréat STL (Sciences et Technologies de Laboratoire) → BTS SIO (Services Informatiques aux Organisations) en spécialité SLAM (Solutions Logicielles et Applications Métier).</p>
+            <p style="margin-top: 1rem;"><strong>Expérience :</strong> Stages chez <strong>DeShagan</strong> (1ère et 2ème année) en tant que développeur web. Reprise de code existant, programmation de nouvelles pages avec optimisation SEO et déploiement en production.</p>
+            <p style="margin-top: 1rem;"><strong>Spécialités :</strong> Développement web (HTML/CSS/JavaScript), optimisation SEO, gestion de projet, support utilisateur, gestion du patrimoine informatique.</p>
+        </div>
+    </section>
+
+    <!-- TABLEAU DE COMPÉTENCES -->
+    <section id="competences" class="competences-section">
+        <h2 class="section-title">Tableau de Compétences</h2>
+        <p class="section-subtitle">Noa RAMIA - BTS SIO SLAM</p>
+        
+        <div style="overflow-x: auto; margin-top: 2rem;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Réalisations professionnelles</th>
+                        <th>Gérer le patrimoine informatique</th>
+                        <th>Répondre aux incidents et demandes d'assistance et d'évolution</th>
+                        <th>Développer la présence en ligne de l'organisation</th>
+                        <th>Travailler en mode projet</th>
+                        <th>Mettre à disposition des utilisateurs un service informatique</th>
+                        <th>Organiser son développement professionnel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AP GLPI</td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>AP Maison des Ligues</td>
+                        <td></td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>AP RestoWeb</td>
+                        <td></td>
+                        <td></td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>AP RestoSwing</td>
+                        <td></td>
+                        <td></td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Stage DeShagan (1ère & 2ème année)</td>
+                        <td></td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td>✕</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Veille informationnelle</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>✕</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">Mes projets</h2>
+        <p class="section-subtitle">Réalisations académiques et stages en milieu professionnel</p>
+        
+        <div class="projects-grid">
+            <div class="project-card" onclick="openModal('glpiModal')">
+                <div class="project-image">🛠️</div>
+                <div class="project-content">
+                    <h4>Utilisation GLPI</h4>
+                    <p>Gestion du patrimoine informatique et support aux utilisateurs avec GLPI (Gestionnaire Libre de Parc Informatique).</p>
+                    <div class="project-tags">
+                        <span class="tag">GLPI</span>
+                        <span class="tag">Patrimoine IT</span>
+                        <span class="tag">Support</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('m2lModal')">
+                <div class="project-image">🏛️</div>
+                <div class="project-content">
+                    <h4>M2L - Maison des Ligues</h4>
+                    <p>Projet complet de site web. Rédaction des besoins, programmation et évolutions en équipe avec gestion de projet.</p>
+                    <div class="project-tags">
+                        <span class="tag">Développement Web</span>
+                        <span class="tag">Gestion Projet</span>
+                        <span class="tag">2024-2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('deshaganModal')">
+                <div class="project-image">🌐</div>
+                <div class="project-content">
+                    <h4>Stage DeShagan (Transactimo)</h4>
+                    <p>Développement web professionnel. Reprise de code, programmation de nouvelles pages, optimisation SEO et logiciel immobilier SaaS.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML/CSS/JS</span>
+                        <span class="tag">SEO</span>
+                        <span class="tag">Frontend</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('restowebModal')">
+                <div class="project-image">🍽️</div>
+                <div class="project-content">
+                    <h4>AP RestoWeb - APPRESTO</h4>
+                    <p>Plateforme de gestion pour restaurants. Gestion des lots et tâches en mode projet collaboratif.</p>
+                    <div class="project-tags">
+                        <span class="tag">Gestion Projet</span>
+                        <span class="tag">Collaboration</span>
+                        <span class="tag">2024-2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('restoswingModal')">
+                <div class="project-image">🍽️</div>
+                <div class="project-content">
+                    <h4>AP RestoSwing - APPRESTO</h4>
+                    <p>Gestion de restaurant avec optimisation des processus et collaboration équipe sur plateforme APPRESTO.</p>
+                    <div class="project-tags">
+                        <span class="tag">Gestion Projet</span>
+                        <span class="tag">Optimisation</span>
+                        <span class="tag">2024-2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODALES PROJETS -->
+    <div id="glpiModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>🛠️ Utilisation GLPI</h2>
+            <div class="modal-section">
+                <h3>Objectif du projet</h3>
+                <p>GLPI (Gestionnaire Libre de Parc Informatique) est une application web open-source de gestion du patrimoine informatique. L'objectif est de maîtriser la gestion des inventaires matériel/logiciel, la création et le suivi des tickets de support, ainsi que la gestion des utilisateurs et des droits d'accès pour une meilleure organisation du parc informatique.</p>
+            </div>
+            <div class="modal-section">
+                <h3>Compétences du tableau BTS SIO</h3>
+                <div class="competence-list">
+                    <div class="competence-item">✓ Gérer le patrimoine informatique</div>
+                    <div class="competence-item">✓ Répondre aux incidents et demandes d'assistance et d'évolution</div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Preuves de la réalisation</h3>
+                <ul class="proof-list">
+                    <li class="proof-item">Configuration des inventaires matériel/logiciel</li>
+                    <li class="proof-item">Création et suivi des tickets de support</li>
+                    <li class="proof-item">Gestion des utilisateurs et des permissions</li>
+                    <li class="proof-item">Documentation des procédures</li>
+                </ul>
+                <div class="proof-gallery" style="margin-top: 2rem;">
+                    <p style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">📸 Dashboard GLPI</p>
+                    <div style="border-radius: 6px; overflow: hidden; cursor: pointer;">
+                        <img src="Glpi preuve.png" alt="GLPI Dashboard" style="width: 100%; height: auto; display: block;">
+                        <img src="Glpi_screenshot.png" alt="GLPI Dashboard" style="width: 100%; height: auto; display: block;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Code source</h3>
+                <p><a href="https://github.com/NoaRAMIA/BTS_SIO_NoaRAMIA.git" target="_blank" class="github-link">📂 Accéder au repository GitHub →</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="m2lModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>🏛️ M2L - Maison des Ligues</h2>
+            <div class="modal-section">
+                <h3>Objectif du projet</h3>
+                <p>Création complète d'un site web pour la Maison des Ligues. L'objectif inclut la rédaction des besoins fonctionnels, la programmation d'un site responsive, la gestion de projet en équipe avec Trello, la création d'une base de données MySQL, et l'implémentation des demandes d'évolution continue.</p>
+            </div>
+            <div class="modal-section">
+                <h3>Compétences du tableau BTS SIO</h3>
+                <div class="competence-list">
+                    <div class="competence-item">✓ Développer la présence en ligne de l'organisation</div>
+                    <div class="competence-item">✓ Travailler en mode projet</div>
+                    <div class="competence-item">✓ Mettre à disposition des utilisateurs un service informatique</div>
+                    <div class="competence-item">✓ Répondre aux incidents et demandes d'assistance et d'évolution</div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Preuves de la réalisation</h3>
+                <ul class="proof-list">
+                    <li class="proof-item">📄 Cahier des charges et rédaction des besoins</li>
+                    <li class="proof-item">🎨 Développement du site responsive</li>
+                    <li class="proof-item">🗄️ Création et gestion de la base de données</li>
+                    <li class="proof-item">📋 Gestion de projet avec Trello</li>
+                    <li class="proof-item">Implémentation des demandes d'évolution</li>
+                </ul>
+                <div class="proof-gallery" style="margin-top: 2rem;">
+                    <p style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">📄 Cahier des charges</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <img src="Cahier des charge M2L .png" alt="Cahier 1" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                        <img src="preuve M2L cahier des charges.webp" alt="Cahier 2" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                    </div>
+
+                    <p style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">🗄️ Base de données</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <img src="Base de donnee M2L .png" alt="BDD 1" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                   </div>
+
+                    <p style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">📋 Gestion de projet (Trello)</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <img src="Trello M2L .png" alt="Trello 1" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-section">
+                <h3>Code source</h3>
+                <p><a href="https://github.com/NoaRAMIA/BTS_SIO_NoaRAMIA.git" target="_blank" class="github-link">📂 Accéder au repository GitHub →</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="deshaganModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>🌐 Stage DeShagan (Transactimo)</h2>
+            <div class="modal-section">
+                <h3>Objectif du projet</h3>
+                <p>Stages professionnels chez DeShagan, entreprise de développement web. L'objectif inclut la reprise et refactorisation du code existant, la programmation de 5+ nouvelles pages web, la mise en place complète de la structure SEO, l'optimisation des métadonnées, et le déploiement en production avec Transactimo (logiciel immobilier SaaS).</p>
+            </div>
+            <div class="modal-section">
+                <h3>Compétences du tableau BTS SIO</h3>
+                <div class="competence-list">
+                    <div class="competence-item">✓ Développer la présence en ligne de l'organisation</div>
+                    <div class="competence-item">✓ Travailler en mode projet</div>
+                    <div class="competence-item">✓ Mettre à disposition des utilisateurs un service informatique</div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Preuves de la réalisation</h3>
+                <ul class="proof-list">
+                    <li class="proof-item">💻 Reprise et compréhension du code existant</li>
+                    <li class="proof-item">🎨 Programmation de 5+ nouvelles pages</li>
+                    <li class="proof-item">🔍 Mise en place de la structure SEO</li>
+                    <li class="proof-item">⚡ Optimisation des métadonnées</li>
+                    <li class="proof-item">🚀 Tests et déploiement en production</li>
+                </ul>
+                <div class="proof-gallery" style="margin-top: 2rem;">
+                    <p style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">🌐 Transactimo - Page web</p>
+                    <div style="border-radius: 6px; overflow: hidden; margin-bottom: 2rem; cursor: pointer;">
+                        <img src="Preuve Transactimo .webp" alt="Transactimo" style="width: 100%; height: auto; display: block;">
+                        <img src="Preuve code transcimo .png" alt="Transactimo" style="width: 100%; height: auto; display: block;">
+
+                    </div>
+
+                
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Code source</h3>
+                <p><a href="https://github.com/NoaRAMIA/BTS_SIO_NoaRAMIA.git" target="_blank" class="github-link">📂 Accéder au repository GitHub →</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="restowebModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>🍽️ AP RestoWeb - APPRESTO</h2>
+            <div class="modal-section">
+                <h3>Objectif du projet</h3>
+                <p>Projet de gestion pour restaurants utilisant la plateforme APPRESTO. L'objectif est d'organiser collaborativement les lots de travail, de décomposer les tâches, d'assigner les responsabilités, de suivre les priorités et délais en mode projet avec une visibilité équipe complète.</p>
+            </div>
+            <div class="modal-section">
+                <h3>Compétences du tableau BTS SIO</h3>
+                <div class="competence-list">
+                    <div class="competence-item">✓ Développer la présence en ligne de l'organisation</div>
+                    <div class="competence-item">✓ Travailler en mode projet</div>
+                    <div class="competence-item">✓ Mettre à disposition des utilisateurs un service informatique</div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Preuves de la réalisation</h3>
+                <ul class="proof-list">
+                    <li class="proof-item">📋 Organisation des lots et tâches</li>
+                    <li class="proof-item">👥 Travail collaboratif en équipe</li>
+                    <li class="proof-item">📊 Suivi et priorités des tâches</li>
+                    <li class="proof-item">📈 Rapports et métriques du projet</li>
+                </ul>
+                <div class="proof-gallery" style="margin-top: 2rem;">
+                    <p style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">📸 Screens APPRESTO RestoWeb</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <img src="Preuve RestoWEB.png" alt="APPRESTO 1" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                        <img src="Trelllo RestoWeb.png" alt="APPRESTO 2" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                         <img src="Trello RestoWeb.png" alt="APPRESTO 2" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                          <img src="Preuve ceode RestoWeb.png" alt="APPRESTO 2" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                          <img src="Preuve resto WEB ET SWING.png"APPRESTO 2" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Code source</h3>
+                <p><a href="https://github.com/NoaRAMIA/BTS_SIO_NoaRAMIA.git" target="_blank" class="github-link">📂 Accéder au repository GitHub →</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="restoswingModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>🍽️ AP RestoSwing - APPRESTO</h2>
+            <div class="modal-section">
+                <h3>Objectif du projet</h3>
+                <p>Projet de gestion pour restaurants utilisant la plateforme APPRESTO. L'objectif est d'organiser et d'optimiser les processus de restaurant, de gérer collaborativement les lots de travail, et de suivre les tâches en mode projet avec gestion des priorités et délais.</p>
+            </div>
+            <div class="modal-section">
+                <h3>Compétences du tableau BTS SIO</h3>
+                <div class="competence-list">
+                    <div class="competence-item">✓ Développer la présence en ligne de l'organisation</div>
+                    <div class="competence-item">✓ Travailler en mode projet</div>
+                    <div class="competence-item">✓ Mettre à disposition des utilisateurs un service informatique</div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Preuves de la réalisation</h3>
+                <ul class="proof-list">
+                    <li class="proof-item">📋 Organisation des lots et tâches</li>
+                    <li class="proof-item">⚙️ Optimisation des processus restaurant</li>
+                    <li class="proof-item">👥 Travail collaboratif en équipe</li>
+                    <li class="proof-item">📊 Suivi et priorités des tâches</li>
+                    <li class="proof-item">📈 Rapports et métriques du projet</li>
+                </ul>
+                <div class="proof-gallery" style="margin-top: 2rem;">
+                    <p style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">📸 Screens APPRESTO RestoWeb</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <img src="RestoSwing Preuve cahier des charge.png" alt="APPRESTO 1" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                        <img src="RestoSwing preuves.png" alt="APPRESTO 2" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                         <img src="Preue restoSwing.png" alt="APPRESTO 2" style="width: 100%; height: auto; border-radius: 6px; cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3>Code source</h3>
+                <p><a href="https://github.com/NoaRAMIA/BTS_SIO_NoaRAMIA.git" target="_blank" class="github-link">📂 Accéder au repository GitHub →</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- VEILLE TECHNOLOGIQUE -->
+    <section id="veille" class="veille-section">
+        <h2>Veille Technologique</h2>
+        <p>Est-ce que l'arrivée de l'IA dans la médecine est une bonne chose ?</p>
+    </section>
+
+    <section style="padding-top: 3rem;">
+        <h2 class="section-title">Arguments en faveur</h2>
+        
+        <div class="cards-grid">
+            <div class="theme-card">
+                <div class="theme-card-header">✅ Amélioration du diagnostic</div>
+                <div class="theme-card-content">
+                    <p>L'IA analyse les images médicales avec une précision accrue, détectant les anomalies plus rapidement que le diagnostic humain seul. Cela peut sauver des vies en détectant les cancers à un stade précoce.</p>
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-card-header">⏱️ Gain de temps</div>
+                <div class="theme-card-content">
+                    <p>Les assistants IA automatisent les tâches administratives répétitives, permettant aux médecins de consacrer plus de temps à interagir avec les patients plutôt que de remplir des formulaires.</p>
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-card-header">💡 Accessibilité améliorée</div>
+                <div class="theme-card-content">
+                    <p>L'IA pourrait rendre les services de santé plus accessibles aux régions isolées grâce à des diagnostics automatisés et des consultations virtuelles plus intelligentes.</p>
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-card-header">📊 Analyse de données</div>
+                <div class="theme-card-content">
+                    <p>L'IA traite d'énormes quantités de données médicales pour identifier des tendances, développer de nouveaux traitements et personnaliser la médecine.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Arguments contre ou préoccupations</h2>
+        
+        <div class="cards-grid">
+            <div class="theme-card">
+                <div class="theme-card-header">⚠️ Perte du contact humain</div>
+                <div class="theme-card-content">
+                    <p>La médecine nécessite une relation de confiance entre médecin et patient. Trop d'automatisation pourrait déshumaniser les soins et affecter le bien-être émotionnel des patients.</p>
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-card-header">🔒 Sécurité des données</div>
+                <div class="theme-card-content">
+                    <p>Les données médicales sont extrêmement sensibles. Il y a un risque réel de violations de confidentialité et d'utilisation abusive des données personnelles des patients.</p>
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-card-header">🚫 Responsabilité légale</div>
+                <div class="theme-card-content">
+                    <p>Qui est responsable si un diagnostic basé sur l'IA s'avère erroné ? Les questions de responsabilité légale et d'assurance restent floues.</p>
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-card-header">💼 Biais algorithmiques</div>
+                <div class="theme-card-content">
+                    <p>Si les données d'entraînement de l'IA sont biaisées, l'algorithme pourrait discriminer certains groupes de patients, aggravant les inégalités de santé existantes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Conclusion</h2>
+        
+        <div style="background: var(--accent-light); border-left: 4px solid var(--accent); padding: 1.5rem; border-radius: 4px;">
+            <p style="color: var(--primary); line-height: 1.8; margin-bottom: 1rem;">
+                <strong>L'IA dans la médecine n'est ni entièrement bonne ni mauvaise - c'est un outil</strong>. Son impact dépend entièrement de comment nous l'utilisons.
+            </p>
+            <p style="color: var(--text-light); line-height: 1.8;">
+                L'IA peut considérablement améliorer la précision des diagnostics, réduire la charge administrative et sauver des vies. Cependant, elle doit être implémentée avec une éthique stricte, une transparence totale et toujours en collaboration avec les professionnels de santé humains. L'important est que l'IA soit un <strong>outil d'assistance</strong> et non un <strong>remplacement</strong> du jugement médical humain.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Sources</h2>
+        <div class="sources-section">
+            <div class="source-item">
+                <div class="source-title">Fondation de France - Recherche médicale 2026</div>
+                <div class="source-url">https://www.fondationdefrance.org/fr/cat-recherche-medicale-sante/soiree-de-la-recherche-medicale-2026</div>
+            </div>
+
+            <div class="source-item">
+                <div class="source-title">CGM - Intelligence artificielle et médecine</div>
+                <div class="source-url">https://www.cgm.com/fra_fr/magazine/articles/2026/intelligence-artificielle-et-medecine</div>
+            </div>
+
+            <div class="source-item">
+                <div class="source-title">MedTech France - Technologies médicales 2026</div>
+                <div class="source-url">https://www.medtechfrance.fr/vie-de-la-profession/actualites/les-nouvelles-technologies-medicales-a-suivre-en-2026/</div>
+            </div>
+
+            <div class="source-item">
+                <div class="source-title">Commission Européenne - IA dans les soins de santé</div>
+                <div class="source-url">https://health.ec.europa.eu/ehealth-digital-health-and-care/artificial-intelligence-healthcare_fr</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <span class="lightbox-nav lightbox-prev" onclick="prevLightbox()">❮</span>
+            <img id="lightboxImage" class="lightbox-image" src="" alt="Image">
+            <span class="lightbox-nav lightbox-next" onclick="nextLightbox()">❯</span>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Noa RAMIA - BTS SIO. Tous droits réservés. | <a href="#top" style="color: white;">↑ Retour en haut</a></p>
+    </footer>
+
+    <script>
+        // MODAL FUNCTIONS
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(event) {
+            if (event && event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            } else {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.classList.remove('show');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // LIGHTBOX FUNCTIONS FOR PROOF IMAGES
+        let lightboxImages = [];
+        let currentImageIndex = 0;
+
+        // Rendre TOUTES les images de .proof-gallery cliquables
+        document.addEventListener('DOMContentLoaded', () => {
+            const allImages = document.querySelectorAll('.proof-gallery img');
+            allImages.forEach((img, index) => {
+                img.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    // Récupérer le src directement de l'image cliquée
+                    const imgSrc = img.getAttribute('src');
+                    // Récupérer toutes les images du même groupe
+                    const parentGallery = img.closest('.proof-gallery');
+                    const siblingImages = parentGallery.querySelectorAll('img');
+                    lightboxImages = Array.from(siblingImages).map(i => i.getAttribute('src'));
+                    currentImageIndex = Array.from(siblingImages).indexOf(img);
+                    showImageLightbox();
+                    document.getElementById('lightbox').classList.add('show');
+                });
+            });
+        });
+
+        function closeLightbox(event) {
+            if (event && !event.target.closest('.lightbox-content')) {
+                document.getElementById('lightbox').classList.remove('show');
+            } else if (!event) {
+                document.getElementById('lightbox').classList.remove('show');
+            }
+        }
+
+        function nextLightbox() {
+            currentImageIndex = (currentImageIndex + 1) % lightboxImages.length;
+            showImageLightbox();
+        }
+
+        function prevLightbox() {
+            currentImageIndex = (currentImageIndex - 1 + lightboxImages.length) % lightboxImages.length;
+            showImageLightbox();
+        }
+
+        function showImageLightbox() {
+            const img = document.getElementById('lightboxImage');
+            img.src = lightboxImages[currentImageIndex];
+            document.getElementById('lightboxCounter').textContent = (currentImageIndex + 1) + ' / ' + lightboxImages.length;
+        }
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('show')) {
+                if (e.key === 'ArrowRight') nextLightbox();
+                if (e.key === 'ArrowLeft') prevLightbox();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+    </script>
+
+</body>
+</html>
